@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Syed Rayyan Ahmed — Applied AI &amp; Data Systems</title>
+<meta name="description" content="Portfolio of Syed Rayyan Ahmed — applied AI, NLP, and data pipeline engineering.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --paper:      #EEEBE2;
+    --paper-raise:#F5F3EC;
+    --ink:        #1B1E1A;
+    --ink-soft:   #4A4A42;
+    --muted:      #8A8477;
+    --rule:       #CFC8B8;
+    --rule-strong:#B7AF9C;
+    --teal:       #1F6F6B;
+    --teal-deep:  #164F4C;
+    --amber:      #B9691E;
+    --stamp:      #A23B2E;
+    --paper-dark: #17231F;
+    --paper-dark-raise: #1E2E28;
+    --ink-on-dark: #E8E4D6;
+
+    --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--teal); outline-offset:3px;}
+
+  ::selection{background:var(--teal); color:var(--paper);}
+
+  /* ---------- background grid texture ---------- */
+  .ledger-bg{
+    background-image:
+      linear-gradient(var(--rule) 1px, transparent 1px);
+    background-size: 100% 42px;
+    background-position: 0 0;
+  }
+
+  .wrap{
+    max-width:1040px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:50;
+    background:rgba(238,235,226,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom:1px solid var(--rule-strong);
+  }
+  .topbar-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 28px;
+    max-width:1040px; margin:0 auto;
+  }
+  .brand{
+    font-family:var(--mono);
+    font-size:14px;
+    letter-spacing:0.02em;
+    display:flex; align-items:center; gap:8px;
+    text-decoration:none;
+    color:var(--ink);
+  }
+  .brand .dot{
+    width:8px; height:8px; border-radius:50%;
+    background:var(--teal);
+    display:inline-block;
+    box-shadow:0 0 0 3px rgba(31,111,107,0.15);
+  }
+  nav.top-nav{display:flex; gap:22px; font-family:var(--mono); font-size:13px;}
+  nav.top-nav a{text-decoration:none; color:var(--ink-soft); padding:4px 2px; border-bottom:1px solid transparent;}
+  nav.top-nav a:hover{color:var(--teal); border-bottom-color:var(--teal);}
+  @media (max-width:640px){ nav.top-nav{display:none;} }
+
+  /* ---------- hero: cover sheet ---------- */
+  .hero{
+    padding:76px 0 56px;
+    border-bottom:1px solid var(--rule-strong);
+  }
+  .file-tag{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--teal-deep);
+    background:rgba(31,111,107,0.09);
+    border:1px solid rgba(31,111,107,0.35);
+    padding:4px 10px;
+    border-radius:2px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .file-tag .blink{
+    width:6px; height:6px; background:var(--teal);
+    border-radius:50%;
+    animation:blink 1.6s step-start infinite;
+  }
+  @keyframes blink{ 50%{opacity:0.15;} }
+
+  h1.name{
+    font-family:var(--mono);
+    font-weight:600;
+    font-size:clamp(34px, 6vw, 58px);
+    line-height:1.05;
+    margin:22px 0 6px;
+    letter-spacing:-0.01em;
+  }
+  .role-line{
+    font-size:clamp(16px, 2.4vw, 19px);
+    color:var(--ink-soft);
+    max-width:640px;
+    margin:0 0 26px;
+  }
+  .role-line strong{color:var(--ink); font-weight:600;}
+
+  .hero-meta{
+    display:flex; flex-wrap:wrap; gap:10px 26px;
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--ink-soft);
+    border-top:1px dashed var(--rule-strong);
+    padding-top:16px;
+    margin-top:8px;
+  }
+  .hero-meta span{white-space:nowrap;}
+  .hero-meta b{color:var(--ink); font-weight:600;}
+
+  .hero-links{display:flex; gap:12px; flex-wrap:wrap; margin-top:26px;}
+  .btn{
+    font-family:var(--mono);
+    font-size:13px;
+    text-decoration:none;
+    padding:10px 16px;
+    border:1px solid var(--ink);
+    color:var(--ink);
+    background:transparent;
+    display:inline-flex; align-items:center; gap:8px;
+    transition:background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+  }
+  .btn:hover{background:var(--ink); color:var(--paper); transform:translateY(-1px);}
+  .btn.primary{background:var(--teal-deep); border-color:var(--teal-deep); color:#fff;}
+  .btn.primary:hover{background:var(--teal); border-color:var(--teal);}
+
+  /* ---------- section shell ---------- */
+  section{padding:64px 0; border-bottom:1px solid var(--rule-strong);}
+  .sec-head{
+    display:flex; align-items:baseline; gap:14px;
+    margin-bottom:34px;
+  }
+  .sec-id{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--muted);
+    letter-spacing:0.08em;
+  }
+  .sec-title{
+    font-family:var(--mono);
+    font-size:22px;
+    font-weight:600;
+    margin:0;
+  }
+  .sec-rule{flex:1; height:1px; background:var(--rule-strong); margin-bottom:6px;}
+
+  /* ---------- about ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap:48px;
+  }
+  @media (max-width:760px){ .about-grid{grid-template-columns:1fr;} }
+  .about-copy p{font-size:16px; color:var(--ink-soft); margin:0 0 16px;}
+  .about-copy p strong{color:var(--ink);}
+
+  .field-card{
+    background:var(--paper-raise);
+    border:1px solid var(--rule-strong);
+    padding:18px 20px;
+  }
+  .field-card + .field-card{margin-top:14px;}
+  .field-card .k{
+    font-family:var(--mono); font-size:11px; text-transform:uppercase;
+    letter-spacing:0.1em; color:var(--muted); margin-bottom:6px;
+  }
+  .field-card .v{font-size:15px; color:var(--ink);}
+
+  /* ---------- pipeline signature strip ---------- */
+  .pipeline{
+    margin-top:44px;
+    border:1px solid var(--rule-strong);
+    background:var(--paper-dark);
+    color:var(--ink-on-dark);
+    padding:22px 22px 20px;
+    overflow-x:auto;
+  }
+  .pipeline-label{
+    font-family:var(--mono); font-size:11px; letter-spacing:0.12em;
+    text-transform:uppercase; color:#8FB5B0; margin-bottom:16px;
+  }
+  .pipeline-row{
+    display:flex; align-items:center; gap:0;
+    min-width:640px;
+  }
+  .pnode{
+    font-family:var(--mono);
+    font-size:13px;
+    display:flex; flex-direction:column; gap:6px;
+    padding:10px 16px;
+    border:1px solid rgba(232,228,214,0.25);
+    background:rgba(232,228,214,0.04);
+    min-width:130px;
+  }
+  .pnode .stage{color:#8FB5B0; font-size:10px; letter-spacing:0.08em; text-transform:uppercase;}
+  .pnode .label{color:var(--ink-on-dark);}
+  .pconnector{
+    flex:0 0 34px; height:1px; background:rgba(232,228,214,0.3);
+    position:relative;
+  }
+  .pconnector::after{
+    content:'▸'; position:absolute; right:-6px; top:50%; transform:translateY(-50%);
+    color:#8FB5B0; font-size:11px;
+  }
+
+  /* ---------- experience ---------- */
+  .entry{
+    display:grid;
+    grid-template-columns: 190px 1fr;
+    gap:24px;
+    padding:26px 0;
+    border-top:1px solid var(--rule);
+  }
+  .entry:first-of-type{border-top:none;}
+  @media (max-width:640px){ .entry{grid-template-columns:1fr; gap:8px;} }
+
+  .entry-when{font-family:var(--mono); font-size:12.5px; color:var(--muted); padding-top:3px;}
+  .entry-when .range{display:block; color:var(--teal-deep); font-weight:600; margin-bottom:4px;}
+
+  .entry-org{
+    display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    margin-bottom:4px;
+  }
+  .entry-org h3{margin:0; font-size:17px; font-weight:700;}
+  .entry-org .place{font-family:var(--mono); font-size:12px; color:var(--muted);}
+  .entry-role{font-size:14px; color:var(--amber); font-weight:600; margin-bottom:10px;}
+  .entry ul{margin:0; padding-left:18px; color:var(--ink-soft); font-size:14.5px;}
+  .entry li{margin-bottom:6px;}
+  .entry li::marker{color:var(--teal);}
+
+  /* ---------- projects ---------- */
+  .proj-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+  }
+  @media (max-width:860px){ .proj-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:600px){ .proj-grid{grid-template-columns:1fr;} }
+
+  .proj-card{
+    border:1px solid var(--rule-strong);
+    background:var(--paper-raise);
+    padding:20px;
+    display:flex; flex-direction:column;
+    min-height:100%;
+    transition:border-color 0.15s ease, transform 0.15s ease;
+  }
+  .proj-card:hover{border-color:var(--teal); transform:translateY(-3px);}
+  .proj-id{font-family:var(--mono); font-size:11px; color:var(--muted); margin-bottom:10px;}
+  .proj-card h3{margin:0 0 10px; font-size:16.5px; line-height:1.3;}
+  .proj-card p{font-size:13.5px; color:var(--ink-soft); margin:0 0 16px; flex:1;}
+  .proj-tags{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px;}
+  .tag{
+    font-family:var(--mono); font-size:10.5px;
+    padding:3px 7px; border:1px solid var(--rule-strong); color:var(--ink-soft);
+  }
+  .proj-link{
+    font-family:var(--mono); font-size:12.5px; color:var(--teal-deep);
+    text-decoration:none; display:inline-flex; align-items:center; gap:6px;
+    font-weight:600;
+  }
+  .proj-link:hover{text-decoration:underline;}
+
+  /* ---------- skills ---------- */
+  .skill-cols{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:28px;
+  }
+  @media (max-width:700px){ .skill-cols{grid-template-columns:1fr;} }
+  .skill-col .k{
+    font-family:var(--mono); font-size:11.5px; text-transform:uppercase;
+    letter-spacing:0.1em; color:var(--muted); margin-bottom:14px;
+    border-bottom:1px solid var(--rule-strong); padding-bottom:8px;
+  }
+  .skill-list{display:flex; flex-wrap:wrap; gap:8px;}
+  .skill-pill{
+    font-family:var(--mono); font-size:12.5px;
+    padding:5px 10px;
+    border:1px solid var(--rule-strong);
+    background:var(--paper-raise);
+    color:var(--ink);
+  }
+
+  /* ---------- contact / footer ---------- */
+  footer{padding:60px 0 40px;}
+  .contact-inner{
+    display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap;
+  }
+  .contact-copy h2{
+    font-family:var(--mono); font-size:26px; margin:0 0 10px; font-weight:600;
+  }
+  .contact-copy p{color:var(--ink-soft); max-width:420px; margin:0;}
+  .contact-links{display:flex; flex-direction:column; gap:10px; align-items:flex-end;}
+  @media (max-width:640px){ .contact-links{align-items:flex-start;} .contact-inner{flex-direction:column; align-items:flex-start;} }
+  .contact-links a{
+    font-family:var(--mono); font-size:14px; text-decoration:none; color:var(--ink);
+    border-bottom:1px solid var(--rule-strong); padding-bottom:2px;
+  }
+  .contact-links a:hover{color:var(--teal); border-color:var(--teal);}
+  .fine-print{
+    margin-top:40px; padding-top:20px; border-top:1px solid var(--rule);
+    font-family:var(--mono); font-size:11.5px; color:var(--muted);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a href="#top" class="brand"><span class="dot"></span>S. RAYYAN AHMED — LEDGER/01</a>
+    <nav class="top-nav">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</div>
+
+<main id="top">
+
+  <!-- HERO -->
+  <header class="hero ledger-bg">
+    <div class="wrap">
+      <span class="file-tag"><span class="blink"></span>STATUS: OPEN TO OPPORTUNITIES</span>
+      <h1 class="name">Syed Rayyan Ahmed</h1>
+      <p class="role-line">
+        I build the systems that turn <strong>raw records into decisions</strong> —
+        NLP pipelines, LLM-based agents, and the dashboards that make them legible to the people who need them.
+      </p>
+
+      <div class="hero-links">
+        <a class="btn primary" href="mailto:syedrayyanahmed1853@gmail.com">Email me →</a>
+        <a class="btn" href="https://github.com/rayyansyed110" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/syed-rayyan-ahmed/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Résumé (PDF)</a>
+      </div>
+
+      <div class="hero-meta">
+        <span><b>Based in</b> Queens, New York</span>
+        <span><b>Studying</b> Computer Science, Queens College (CUNY) — Spring 2027</span>
+        <span><b>Currently</b> Staff Analyst Intern, MTA — Vendor Relations</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-id">§ 01</span>
+        <h2 class="sec-title">About</h2>
+        <div class="sec-rule"></div>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-copy">
+          <p>
+            I'm a <strong>Computer Science undergraduate</strong> who learned data the unglamorous way first —
+            reconciling vendor contracts, tracing hardware failures to their root cause, syncing sensor
+            data that kept falling out of order — before turning that same instinct toward
+            <strong>applied AI</strong>: language models, topic clustering, and agent pipelines that
+            actually ship.
+          </p>
+          <p>
+            That combination shows up in how I build. I don't just fine-tune a model or wire up an API call —
+            I think about where the data comes from, whether it's clean, who's going to read the output,
+            and whether the system still works at 2am when nobody's watching. Procurement audits and IoT
+            sensor pipelines taught me that; NLP and LLM projects are where I get to apply it.
+          </p>
+          <p>
+            Right now I'm exploring <strong>multimodal AI and rapid prototyping</strong> — moving fast from
+            a research idea to a working, evaluable system.
+          </p>
+        </div>
+
+        <div class="about-side">
+          <div class="field-card">
+            <div class="k">Focus areas</div>
+            <div class="v">NLP · LLM applications · Agentic pipelines (CrewAI) · Data engineering</div>
+          </div>
+          <div class="field-card">
+            <div class="k">Also fluent in</div>
+            <div class="v">SQL, Power BI, and the unglamorous work of reconciling messy real-world data</div>
+          </div>
+          <div class="field-card">
+            <div class="k">Graduating</div>
+            <div class="v">Spring 2027 — Queens College, CUNY</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pipeline" role="img" aria-label="Diagram of a typical project pipeline: ingest, clean, model, ship">
+        <div class="pipeline-label">// a typical project, end to end</div>
+        <div class="pipeline-row">
+          <div class="pnode"><span class="stage">01 · Ingest</span><span class="label">Scrape / API pull raw data</span></div>
+          <div class="pconnector"></div>
+          <div class="pnode"><span class="stage">02 · Clean</span><span class="label">Validate &amp; reconcile records</span></div>
+          <div class="pconnector"></div>
+          <div class="pnode"><span class="stage">03 · Model</span><span class="label">NLP / LLM / agent layer</span></div>
+          <div class="pconnector"></div>
+          <div class="pnode"><span class="stage">04 · Ship</span><span class="label">Dashboard or working prototype</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-id">§ 02</span>
+        <h2 class="sec-title">Experience</h2>
+        <div class="sec-rule"></div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-when"><span class="range">OCT 2025 — PRESENT</span>Queens, NY</div>
+        <div>
+          <div class="entry-org"><h3>Metropolitan Transportation Authority (MTA)</h3><span class="place">Vendor Relations Unit</span></div>
+          <div class="entry-role">Staff Analyst Intern, Procurement</div>
+          <ul>
+            <li>Evaluated and managed procurement projects exceeding $5M, ensuring compliance, data accuracy, and performance tracking across contracts.</li>
+            <li>Audited and reconciled vendor records using SQL, Microsoft Access, and Excel, collaborating with project managers to resolve discrepancies.</li>
+            <li>Developed automated Power BI dashboards and streamlined data workflows to support executive decision-making.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-when"><span class="range">SEP 2024 — OCT 2025</span>Queens, NY</div>
+        <div>
+          <div class="entry-org"><h3>Department of Education</h3><span class="place">NYC</span></div>
+          <div class="entry-role">IT Intern</div>
+          <ul>
+            <li>Diagnosed and resolved hardware, software, and network issues in a high-volume production environment, improving system reliability by 25%.</li>
+            <li>Performed root-cause analysis on recurring failures and documented fixes to prevent regressions.</li>
+            <li>Supported mission-critical classroom systems, prioritizing incidents under time constraints while maintaining uptime.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-when"><span class="range">JUL 2024 — JUN 2025</span>Manhattan, NY</div>
+        <div>
+          <div class="entry-org"><h3>Loisaida Inc</h3></div>
+          <div class="entry-role">Software Engineering Intern</div>
+          <ul>
+            <li>Designed and deployed Python-based data ingestion and processing systems collecting metrics from 20+ distributed IoT sensors.</li>
+            <li>Debugged and optimized offline/online data synchronization logic, improving data integrity by 20%.</li>
+            <li>Built reusable modules for data validation, aggregation, and visualization to support monitoring and reporting.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-when"><span class="range">JUL 2023 — JAN 2024</span>Riyadh, KSA</div>
+        <div>
+          <div class="entry-org"><h3>Shttle</h3></div>
+          <div class="entry-role">Business Analyst Intern</div>
+          <ul>
+            <li>Closed high-profile partnerships via strategic pitch decks, securing deals with the Public Investment Fund ($930B) and Saudi Arabia's Ministry of Tourism.</li>
+            <li>Grew Shttle's network by representing the company at key events, securing 3 new partnerships and improving operational efficiency.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-when"><span class="range">SEP 2023 — JAN 2024</span>Riyadh, KSA</div>
+        <div>
+          <div class="entry-org"><h3>Zero Call by Nawafith</h3></div>
+          <div class="entry-role">Product Manager / Co-Founder</div>
+          <ul>
+            <li>Led development of an MVP using Agile methodologies, collaborating with engineers on system design and feature implementation.</li>
+            <li>Defined technical requirements and prioritized backlogs, shipping features that achieved a 20% faster time-to-market.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-id">§ 03</span>
+        <h2 class="sec-title">Education</h2>
+        <div class="sec-rule"></div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-when"><span class="range">EXPECTED SPRING 2027</span>Queens, NY</div>
+        <div>
+          <div class="entry-org"><h3>Queens College, CUNY</h3><span class="place">City University of New York</span></div>
+          <div class="entry-role">B.A./B.S. in Computer Science</div>
+          <ul>
+            <li>Coursework spanning data structures &amp; algorithms, object-oriented programming, and machine learning.</li>
+            <li>Coursework and independent projects applied directly to internships in data engineering and applied AI.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-id">§ 04</span>
+        <h2 class="sec-title">Projects</h2>
+        <div class="sec-rule"></div>
+      </div>
+
+      <div class="proj-grid">
+        <div class="proj-card">
+          <div class="proj-id">PRJ / CHEWY-CX</div>
+          <h3>AI customer intelligence platform</h3>
+          <p>Analyzed 4,439+ Chewy YouTube comments end-to-end — topic modeling with BERTopic, generative synthesis with Gemini, and an agent layer built on CrewAI to turn raw comments into business recommendations.</p>
+          <div class="proj-tags">
+            <span class="tag">Hugging Face</span>
+            <span class="tag">BERTopic</span>
+            <span class="tag">Gemini</span>
+            <span class="tag">CrewAI</span>
+          </div>
+          <a class="proj-link" href="https://github.com/rayyansyed110" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-id">PRJ / NIKE-NLP</div>
+          <h3>Sentiment &amp; aspect analysis system</h3>
+          <p>Built an NLP pipeline for Nike using CrewAI and GPT to automate data scraping, then ran emotion and aspect-based sentiment analysis with spaCy and visualized the results in Power BI.</p>
+          <div class="proj-tags">
+            <span class="tag">CrewAI</span>
+            <span class="tag">GPT</span>
+            <span class="tag">spaCy</span>
+            <span class="tag">Power BI</span>
+          </div>
+          <a class="proj-link" href="https://github.com/rayyansyed110" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-id">PRJ / NYC-311</div>
+          <h3>NYC noise complaint analysis</h3>
+          <p>Analyzed 1,000+ NYC 311 noise complaints pulled from the Open Data API, surfacing borough-level patterns and peak noise hours with pandas, matplotlib, and seaborn.</p>
+          <div class="proj-tags">
+            <span class="tag">Python</span>
+            <span class="tag">pandas</span>
+            <span class="tag">Open Data API</span>
+            <span class="tag">seaborn</span>
+          </div>
+          <a class="proj-link" href="https://github.com/rayyansyed110" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-id">§ 05</span>
+        <h2 class="sec-title">Skills</h2>
+        <div class="sec-rule"></div>
+      </div>
+
+      <div class="skill-cols">
+        <div class="skill-col">
+          <div class="k">Programming &amp; data</div>
+          <div class="skill-list">
+            <span class="skill-pill">Python</span>
+            <span class="skill-pill">SQL</span>
+            <span class="skill-pill">C++</span>
+            <span class="skill-pill">C#</span>
+            <span class="skill-pill">Visual Basic</span>
+            <span class="skill-pill">spaCy</span>
+            <span class="skill-pill">Hugging Face</span>
+            <span class="skill-pill">OpenAI APIs</span>
+          </div>
+        </div>
+        <div class="skill-col">
+          <div class="k">Tools</div>
+          <div class="skill-list">
+            <span class="skill-pill">CrewAI</span>
+            <span class="skill-pill">Ollama</span>
+            <span class="skill-pill">Local LLM Hosting</span>
+            <span class="skill-pill">Power BI</span>
+            <span class="skill-pill">API Development</span>
+            <span class="skill-pill">Data Pipelines</span>
+          </div>
+        </div>
+        <div class="skill-col">
+          <div class="k">Practices</div>
+          <div class="skill-list">
+            <span class="skill-pill">Agile</span>
+            <span class="skill-pill">OOP</span>
+            <span class="skill-pill">Data Structures</span>
+            <span class="skill-pill">CI/CD</span>
+            <span class="skill-pill">Debugging</span>
+            <span class="skill-pill">Data Validation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / FOOTER -->
+  <footer id="contact" class="ledger-bg">
+    <div class="wrap">
+      <div class="contact-inner">
+        <div class="contact-copy">
+          <h2>Let's talk.</h2>
+          <p>Open to internships and roles in applied AI, data engineering, and analytics. The fastest way to reach me is email.</p>
+        </div>
+        <div class="contact-links">
+          <a href="mailto:syedrayyanahmed1853@gmail.com">syedrayyanahmed1853@gmail.com</a>
+          <a href="tel:+19296900094">+1 (929) 690-0094</a>
+          <a href="https://github.com/rayyansyed110" target="_blank" rel="noopener">github.com/rayyansyed110 →</a>
+          <a href="https://www.linkedin.com/in/syed-rayyan-ahmed/" target="_blank" rel="noopener">linkedin.com/in/syed-rayyan-ahmed →</a>
+        </div>
+      </div>
+
+      <div class="fine-print">
+        <span>© 2026 Syed Rayyan Ahmed — Queens, New York</span>
+        <span>Built with HTML/CSS · no framework, no tracking</span>
+      </div>
+    </div>
+  </footer>
+
+</main>
+
+</body>
+</html>
